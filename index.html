@@ -232,7 +232,7 @@
       transform: translateX(26px);
     }
     /* Responsive adjustments for mobile */
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       .content {
         flex-direction: column;
         align-items: stretch;
@@ -329,7 +329,7 @@
 /* ===================================
    RESPONSIVENESS
    =================================== */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .footer-content {
     /* Stack items vertically on smaller screens */
     flex-direction: column;
@@ -396,7 +396,7 @@
     text-align: left;  /* Keep text left-aligned on tablet and desktop */
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .footer-content {
     flex-direction: column;
     text-align: center;
@@ -416,7 +416,7 @@
 }
 
 /* Mobile Responsiveness for Footer Layout */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .copyright .line1,
   .copyright .line2 {
     display: block;
@@ -433,16 +433,14 @@
 .powered {
   font-family: 'Pacifico', cursive;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* Remove the default 20px padding on the sides */
   body {
     padding: 0 8px !important;
   }
 
   /* Tweak your main container so it isn’t also inset */
-  .main-container {
-    padding: 16px 0px !important;
-  }
+  
 
   /* If you still need a tiny bit of breathing room around controls */
   .controls-left {
@@ -476,6 +474,19 @@
   
   
 }
+
+@media (max-width: 767px) {
+  footer,
+  .footer {
+    position: relative;
+    left: -8px; /* adjust as needed */
+    width: calc(100% + 16px); /* extend to compensate */
+    
+  }
+}
+
+
+
   </style>
 </head>
 <body>
