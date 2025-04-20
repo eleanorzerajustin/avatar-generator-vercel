@@ -1,18 +1,26 @@
-import axios from 'axios';
-
 export default async function handler(req, res) {
-  const url = req.query.url;
-
-  if (!url) {
-    return res.status(400).send("Missing URL");
+    const targetUrl = req.query.url;
+    if (!targetUrl) {
+      return res.status(400).json({ error: "Missing URL" });
+    }
+  
+    try {
+      const response = await fetch(targetUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0",
+        },
+      });
+  
+      if (!response.ok) {
+        return res.status(response.status).send("Failed to fetch");
+      }
+  
+      const contentType = response.headers.get("content-type");
+      res.setHeader("Content-Type", contentType);
+      const buffer = await response.arrayBuffer();
+      res.status(200).send(Buffer.from(buffer));
+    } catch (err) {
+      res.status(500).json({ error: "Internal Server Error", details: err.message });
+    }
   }
-
-  try {
-    const response = await axios.get(url, { responseType: 'arraybuffer' });
-    res.setHeader('Content-Type', 'image/svg+xml');
-    res.setHeader('Access-Control-Allow-Origin', '*'); // ✅ CORS fix
-    res.send(response.data);
-  } catch (error) {
-    res.status(500).send("Proxy error: " + error.message);
-  }
-}
+  
